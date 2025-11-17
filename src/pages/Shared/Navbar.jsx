@@ -1,13 +1,32 @@
 import React from "react";
 import Logo from "../../components/Logo";
 import { Link, NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-    const links = <>
-    <li><NavLink to=''>Services</NavLink></li>
-    <li><NavLink to=''>About Us</NavLink></li>
-    <li><NavLink to='/coverage'>Coverage</NavLink></li>
+  const { user,logOut } = useAuth();
+  const handleLogout = () =>{
+    logOut()
+    .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  const links = (
+    <>
+      <li>
+        <NavLink to="">Services</NavLink>
+      </li>
+      <li>
+        <NavLink to="">About Us</NavLink>
+      </li>
+      <li>
+        <NavLink to="/coverage">Coverage</NavLink>
+      </li>
     </>
+  );
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -36,15 +55,16 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost text-xl"><Logo></Logo></Link>
+        <Link to="/" className="btn btn-ghost text-xl">
+          <Logo></Logo>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? <a onClick={handleLogout} className="btn">LogOut</a> : <Link className="btn" to='/login'>Login</Link> }
+        <Link className="btn btn-primary text-black mx-4" to='/beARider'>Be a Rider</Link>
       </div>
     </div>
   );
