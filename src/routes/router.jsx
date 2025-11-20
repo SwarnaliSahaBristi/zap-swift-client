@@ -5,35 +5,55 @@ import Coverage from "../pages/Coverage";
 import AuthLayout from "../layout/AuthLayout";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import Rider from "../pages/Rider";
+import PrivateRoute from "./PrivateRoute";
+import SendParcel from "../pages/SendParcel";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
     children: [
-        {
-            index: true,
-            Component: Home
-        },
-        {
-            path: '/coverage',
-            element: <Coverage></Coverage>,
-            loader: ()=>fetch('/warehouses.json').then(res=>res.json())
-        }
-    ]
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/coverage",
+        element: <Coverage></Coverage>,
+        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+      },
+      {
+        path: "/rider",
+        element: (
+          <PrivateRoute>
+            <Rider></Rider>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/send-parcel",
+        element: (
+          <PrivateRoute>
+            <SendParcel></SendParcel>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("/warehouses.json").then((res) => res.json()),
+      },
+    ],
   },
   {
-    path: '/',
+    path: "/",
     Component: AuthLayout,
     children: [
       {
-        path: '/login',
+        path: "/login",
         element: <Login></Login>,
       },
       {
-        path: '/register',
-        element: <Register></Register>
-      }
-    ]
-  }
+        path: "/register",
+        element: <Register></Register>,
+      },
+    ],
+  },
 ]);
