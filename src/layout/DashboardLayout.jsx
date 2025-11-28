@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router";
 import { Link, Outlet } from "react-router";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaRegCreditCard } from "react-icons/fa";
+import { FaMotorcycle, FaRegCreditCard } from "react-icons/fa";
 
 const DashboardLayout = () => {
   return (
@@ -84,6 +84,13 @@ const DashboardLayout = () => {
                 data-tip="PaymentHistory">
                     <FaRegCreditCard />
                     <span className="is-drawer-close:hidden">Payment History</span></NavLink>
+            </li>
+            {/* {our dashboard link} */}
+            <li>
+                <NavLink to='/dashboard/approve-riders' className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="ApproveRiders">
+                    <FaMotorcycle />
+                    <span className="is-drawer-close:hidden">Approve Riders</span></NavLink>
             </li>
 
             {/* List item */}
