@@ -15,6 +15,10 @@ import PaymentSuccess from "../pages/Dashboard/PaymentSuccess";
 import PaymentCancelled from "../pages/Dashboard/PaymentCancelled";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 import ApproveRiders from "../pages/Dashboard/ApproveRiders";
+import UsersManagement from "../pages/Dashboard/UsersManagement";
+import Forbidden from "../components/Forbidden";
+import AdminRoute from "./AdminRoute";
+import AssignRiders from "../pages/Dashboard/AssignRiders";
 
 export const router = createBrowserRouter([
   {
@@ -73,29 +77,49 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard/my-parcels',
-        element: <MyParcels></MyParcels>
+        path: "/dashboard/my-parcels",
+        element: <MyParcels></MyParcels>,
       },
       {
-        path: '/dashboard/payment/:parcelId',
-        element: <Payment></Payment>
+        path: "/dashboard/payment/:parcelId",
+        element: <Payment></Payment>,
       },
       {
-        path: '/dashboard/payment-success',
-        element: <PaymentSuccess></PaymentSuccess>
+        path: "/dashboard/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
-        path: '/dashboard/payment-cancelled',
-        element: <PaymentCancelled></PaymentCancelled>
+        path: "/dashboard/payment-cancelled",
+        element: <PaymentCancelled></PaymentCancelled>,
       },
       {
-        path: '/dashboard/payment-history',
-        element: <PaymentHistory></PaymentHistory>
+        path: "/dashboard/payment-history",
+        element: <PaymentHistory></PaymentHistory>,
       },
       {
-        path: '/dashboard/approve-riders',
-        element: <ApproveRiders></ApproveRiders>
-      }
-    ]
+        path: "/dashboard/approve-riders",
+        element: (
+          <AdminRoute>
+            <ApproveRiders></ApproveRiders>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/assign-riders",
+        element: (
+          <AdminRoute>
+            <AssignRiders></AssignRiders>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/users-management",
+        element: (
+          <AdminRoute>
+            <UsersManagement></UsersManagement>
+          </AdminRoute>
+        ),
+      },
+    ],
   },
 ]);
