@@ -38,13 +38,12 @@ const AssignRiders = () => {
       riderName: rider.riderName,
       riderEmail: rider.riderEmail,
       parcelId: selectedParcels._id,
+      trackingId : selectedParcels.trackingId
     };
     axiosSecure
       .patch(`/parcels/${selectedParcels._id}`, riderAssignInfo)
       .then((res) => {
-        if (res.data.modifiedCount) {
-          riderModalRef.current.close();
-          parcelsRefetch();
+        if(res.data.modifiedCount) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -52,6 +51,8 @@ const AssignRiders = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          riderModalRef.current.close();
+          parcelsRefetch();
         }
       });
   };

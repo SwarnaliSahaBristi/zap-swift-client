@@ -19,6 +19,10 @@ import UsersManagement from "../pages/Dashboard/UsersManagement";
 import Forbidden from "../components/Forbidden";
 import AdminRoute from "./AdminRoute";
 import AssignRiders from "../pages/Dashboard/AssignRiders";
+import AssignedDeliveries from "../pages/Dashboard/AssignedDeliveries";
+import RiderRoute from "./RiderRoute";
+import CompletedDeliveries from "../pages/Dashboard/CompletedDeliveries";
+import ParcelTrack from "../pages/ParcelTrack";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +56,10 @@ export const router = createBrowserRouter([
         ),
         loader: () => fetch("/warehouses.json").then((res) => res.json()),
       },
+      {
+        path: '/parcel-track/:trackingId',
+        element: <ParcelTrack></ParcelTrack>
+      }
     ],
   },
   {
@@ -96,6 +104,24 @@ export const router = createBrowserRouter([
         path: "/dashboard/payment-history",
         element: <PaymentHistory></PaymentHistory>,
       },
+      //rider only routes
+      {
+        path: "/dashboard/assigned-deliveries",
+        element: (
+          <RiderRoute>
+            <AssignedDeliveries></AssignedDeliveries>
+          </RiderRoute>
+        ),
+      },
+      {
+        path: "/dashboard/completed-deliveries",
+        element: (
+          <RiderRoute>
+            <CompletedDeliveries></CompletedDeliveries>
+          </RiderRoute>
+        ),
+      },
+      //admin related routes
       {
         path: "/dashboard/approve-riders",
         element: (
