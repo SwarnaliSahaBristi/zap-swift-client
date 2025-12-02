@@ -21,7 +21,7 @@ const mapRef = useRef(null);
   }
   
   return (
-    <div>
+    <div className="p-8">
       <h2 className="text-5xl">We are available in 64 districts</h2>
       {/* {search input} */}
       <div>

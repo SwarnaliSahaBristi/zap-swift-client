@@ -6,6 +6,7 @@ import { FaMotorcycle, FaRegCreditCard, FaTasks, FaUsers } from "react-icons/fa"
 import { RiEBikeFill } from "react-icons/ri";
 import { SiGoogletasks } from "react-icons/si";
 import useRole from "../hooks/useRole";
+import logoImg from "../assets/logo.png";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -54,8 +55,11 @@ const DashboardLayout = () => {
           <ul className="menu w-full grow">
             {/* List item */}
             <li>
+              <Link to='/'><img src={logoImg} alt="" /></Link>
+            </li>
+            <li>
               <Link
-                to="/"
+                to="/dashboard"
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Homepage"
               >
