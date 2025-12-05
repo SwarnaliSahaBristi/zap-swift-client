@@ -16,7 +16,7 @@ const AssignRiders = () => {
     },
   });
 
-  const { data: riders = [] } = useQuery({
+  const { data: riders = [], refetch: riderRefetch } = useQuery({
     queryKey: ["riders", selectedParcels?.senderDistrict, "available"],
     enabled: !!selectedParcels,
     queryFn: async () => {
@@ -38,12 +38,15 @@ const AssignRiders = () => {
       riderName: rider.riderName,
       riderEmail: rider.riderEmail,
       parcelId: selectedParcels._id,
-      trackingId : selectedParcels.trackingId
+      trackingId: selectedParcels.trackingId,
     };
     axiosSecure
       .patch(`/parcels/${selectedParcels._id}`, riderAssignInfo)
       .then((res) => {
-        if(res.data.modifiedCount) {
+        if (res.data.modifiedCount) {
+          riderModalRef?.current?.close();
+          parcelsRefetch();
+          riderRefetch();
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -51,8 +54,6 @@ const AssignRiders = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          riderModalRef.current.close();
-          parcelsRefetch();
         }
       });
   };

@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "dragon-news-auth-7bc5f",
+    "prod": "dragon-news-auth-7bc5f"
+  },
+  "targets": {},
+  "etags": {}
+}
